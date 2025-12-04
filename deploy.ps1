@@ -5,7 +5,7 @@ $ErrorActionPreference = "Stop"
 
 # Variables
 $publishDir = "bin\Release\net10.0\publish\wwwroot"
-$mainBranch = "main"   # change if your default branch is called 'master'
+$mainBranch = "master"   # change if your default branch is called 'master'
 
 # Ensure publish output exists
 if (!(Test-Path $publishDir)) {
