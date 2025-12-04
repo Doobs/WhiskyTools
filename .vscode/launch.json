@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch WhiskyTools (HTTPS in Edge)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "d:/dev/WhiskyTools/WhiskyTools.csproj",
+        "--launch-profile",
+        "https"
+      ],
+      "cwd": "d:/dev/WhiskyTools",
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bhttps://localhost:\\d+\\b",
+        "uriFormat": "https://localhost:7164"
+      }
+    }
+  ]
+}
