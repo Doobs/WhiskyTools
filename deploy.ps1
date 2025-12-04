@@ -20,7 +20,18 @@ Write-Host "Clearing branch contents..."
 git rm -rf .
 
 Write-Host "Copying published files..."
-Copy-Item "$publishDir\*" -Destination . -Recurse
+Copy-Item "$publishDir\*" -Destination . -Recurse -Force
+
+# Ensure .nojekyll exists (so _content folders are served)
+Write-Host "Adding .nojekyll file..."
+New-Item -Path ".nojekyll" -ItemType File -Force | Out-Null
+
+# Replace service-worker.js with the published version
+$swPublished = Join-Path $publishDir "service-worker.published.js"
+if (Test-Path $swPublished) {
+    Write-Host "Using published service worker..."
+    Copy-Item $swPublished -Destination "service-worker.js" -Force
+}
 
 Write-Host "Adding files..."
 git add .
@@ -35,3 +46,4 @@ Write-Host "Switching back to $mainBranch..."
 git checkout $mainBranch
 
 Write-Host "Deployment complete!"
+
