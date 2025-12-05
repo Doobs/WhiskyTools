@@ -1,4 +1,0 @@
-D:\Dev\WhiskyTools\bin\Release\net10.0\publish\wwwroot\index.html
-D:\Dev\WhiskyTools\bin\Release\net10.0\publish\WhiskyTools.runtimeconfig.json
-D:\Dev\WhiskyTools\bin\Release\net10.0\publish\dotnet.js
-D:\Dev\WhiskyTools\bin\Release\net10.0\publish\web.config
