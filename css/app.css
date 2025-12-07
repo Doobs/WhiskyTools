@@ -160,3 +160,67 @@ code {
     padding-top: 40px;
 }
 
+/* .tab-content {
+    animation: fadeIn 0.3s ease-in;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+} */
+
+.xnav-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;             /* hide vertical scrollbar */
+    -webkit-overflow-scrolling: touch;
+}
+.xnav-tabs .nav-item {
+    flex: 0 0 auto;
+}
+
+
+.nav-tabs .nav-link {
+    color: white; 
+    background-color: var(--bs-secondary);             /* darker neutral text */
+}
+.nav-tabs .nav-link.active {
+    color: white;              /* stronger for active tab */
+    background-color: var(--bs-primary); /*#e9ecef; subtle background highlight */
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.card {
+    background-color: #FAEFD8; /* #f8f9fa; light grey from Bootstrap palette */
+    border-radius: 0.1rem;     /* rounded corners */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* subtle shadow */
+    padding: 4px;
+}
+
+/* Make the range track use Bootstrap primary */
+.form-range::-webkit-slider-runnable-track {
+    background: var(--bs-primary);
+    height: 0.5rem;
+    border-radius: 0.25rem;
+}
+.form-range::-moz-range-track {
+    background: var(--bs-primary);
+    height: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+/* Style the thumb (the draggable handle) */
+.form-range::-webkit-slider-thumb {
+    background: #fff;
+    border: 2px solid var(--bs-primary);
+    border-radius: 50%;
+    height: 1rem;
+    width: 1rem;
+    margin-top: -0.25rem; /* align with track */
+}
+.form-range::-moz-range-thumb {
+    background: #fff;
+    border: 2px solid var(--bs-primary);
+    border-radius: 50%;
+    height: 1rem;
+    width: 1rem;
+}
