@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "WhiskyTools",
   "resources": {
-    "hash": "sha256-VQAWNPZ6mMqD6y5cfZOinK+n7wlcLyHboOY4xS+e6Vo=",
+    "hash": "sha256-OX8M4T2Q8tnUuZ8Bq7wcq9ZMwkLR9EG+XEfjbVSF1fs=",
     "fingerprinting": {
       "BlazorBootstrap.3fpgua723m.wasm": "BlazorBootstrap.wasm",
       "Microsoft.AspNetCore.Components.7f6r8nixzn.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -48,7 +48,7 @@
       "System.Threading.q2tgddxke7.wasm": "System.Threading.wasm",
       "System.t4d4s3f398.wasm": "System.wasm",
       "System.Private.CoreLib.gm2lpfz2zy.wasm": "System.Private.CoreLib.wasm",
-      "WhiskyTools.i158c492ie.wasm": "WhiskyTools.wasm",
+      "WhiskyTools.9dpjx09gsi.wasm": "WhiskyTools.wasm",
       "dotnet.js": "dotnet.js",
       "dotnet.native.noby4tlk4d.js": "dotnet.native.js",
       "dotnet.native.qe75a9vfqn.wasm": "dotnet.native.wasm",
@@ -119,7 +119,7 @@
       "System.Text.RegularExpressions.jxs2ajikh8.wasm": "sha256-95TJYsb2+9QRbnefpfTJobaUig4ahkVSUE/swUQpL1U=",
       "System.Threading.q2tgddxke7.wasm": "sha256-zncUNmLvW8+ubA+sqWx5FiQfdH+7iXKdHOZT34w96r0=",
       "System.t4d4s3f398.wasm": "sha256-fVP2BxRRKpBA0PmBbKxmO45bXDrAXVn1GthlDclLbeU=",
-      "WhiskyTools.i158c492ie.wasm": "sha256-hvfR8PaoMs0i/g9ASXh0YZTDbUhXgzz+Zi5ugVZeQ68="
+      "WhiskyTools.9dpjx09gsi.wasm": "sha256-06fkJxrUi+fpFcLLwtnJmL+ZJmkYiykbSKLexld1EbQ="
     }
   },
   "cacheBootResources": true,
