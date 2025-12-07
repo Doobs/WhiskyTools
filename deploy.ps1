@@ -68,7 +68,7 @@ New-Item -Path (Join-Path $worktreeDir ".nojekyll") -ItemType File -Force | Out-
 
 
 # Commit and push
-Write-Host "Add... but commit manually and update index.html base href first"
+Write-Host "Add... should have auto update index.html base href so can commit"
 git add .
 git commit -m "Deploy Blazor WASM app"
 git push origin gh-pages --force
