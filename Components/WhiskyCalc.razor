@@ -1,0 +1,58 @@
+<h4>Whisky Dilution Calculator</h4>
+
+<div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Volume (ml):</label>
+    <div class="col-sm-9 mt-2">
+        <div class="input-group">
+            <input type="number" class="form-control" @bind="volume" />
+            <button class="btn btn-outline-secondary" @onclick="() => SetVolume(30)">30</button>
+            <button class="btn btn-outline-secondary" @onclick="() => SetVolume(50)">50</button>
+        </div>
+    </div>
+</div>
+
+<div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Current ABV (%):</label>
+    <div class="col-sm-9 mt-2">
+        <input type="number" class="form-control" @bind="currentAbv" />
+    </div>
+</div>
+
+<div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Target ABV (%):</label>
+    <div class="col-sm-9 mt-2">
+        <input type="number" class="form-control" @bind="targetAbv" />
+    </div>
+</div>
+
+<button class="btn btn-primary" @onclick="CalculateDilution">Calculate</button>
+
+@if (waterToAdd > 0)
+{
+    <p class="mt-3">Add <b>@waterToAdd.ToString("F1") ml</b> of water.</p>
+}
+
+@code {
+    // Defaults
+    double volume = 30;
+    double currentAbv = 57.2;
+    double targetAbv = 42;
+    double waterToAdd;
+
+    protected override void OnInitialized()
+    {
+        CalculateDilution();
+    }
+
+    void CalculateDilution()
+    {
+        var finalVolume = (currentAbv * volume) / targetAbv;
+        waterToAdd = finalVolume - volume;
+    }
+
+    void SetVolume(double preset)
+    {
+        volume = preset;
+        CalculateDilution();
+    }
+}

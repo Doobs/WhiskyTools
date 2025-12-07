@@ -63,11 +63,15 @@ New-Item -Path (Join-Path $worktreeDir ".nojekyll") -ItemType File -Force | Out-
 #     Copy-Item $swPublished -Destination (Join-Path $worktreeDir "service-worker.js") -Force
 # }
 
+(Get-Content "$worktreeDir/index.html") -replace '<base href="/" />', '<base href="/WhiskyTools/" />' |
+    Set-Content "$worktreeDir/index.html"
+
+
 # Commit and push
 Write-Host "Add... but commit manually and update index.html base href first"
 git add .
-#git commit -m "Deploy Blazor WASM app"
-#git push origin gh-pages --force
+git commit -m "Deploy Blazor WASM app"
+git push origin gh-pages --force
 
 # Return to source repo
 Set-Location $repoDir

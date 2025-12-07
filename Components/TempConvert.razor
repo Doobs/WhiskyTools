@@ -1,0 +1,50 @@
+<h4>Temperature Converter</h4>
+
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Fahrenheit:</label>
+        <div class="col-sm-6">
+            <input type="number" class="form-control" @bind="fahrenheit" step="10.0" />
+        </div>
+        <div class="col-sm-3 mt-2">
+            <button class="btn btn-secondary w-100" @onclick="ConvertToC">To °C</button>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Celsius:</label>
+        <div class="col-sm-6">
+            <input type="number" class="form-control" @bind="celsius" step="10.0" />
+        </div>
+        <div class="col-sm-3 mt-2">
+            <button class="btn btn-secondary w-100" @onclick="ConvertToF">To °F</button>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(result))
+    {
+        <p class="mt-3">@result</p>
+    }
+
+@code{
+    double fahrenheit = 250;
+    double celsius;
+    string result;
+
+     protected override void OnInitialized()
+    {
+        // Run initial calculations
+        ConvertToC();
+    }
+
+    void ConvertToC()
+    {
+        celsius = Math.Round((fahrenheit - 32) * 5 / 9,1);
+        result = $"{fahrenheit} °F = {celsius:F1} °C";
+    }
+
+    void ConvertToF()
+    {
+        fahrenheit = Math.Round((celsius * 9 / 5) + 32,1);
+        result = $"{celsius} °C = {fahrenheit:F1} °F";
+    }
+}
