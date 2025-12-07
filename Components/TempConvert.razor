@@ -1,27 +1,33 @@
 <h4>Temperature Converter</h4>
 
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label">Fahrenheit:</label>
-        <div class="col-sm-6">
-            <input type="number" class="form-control" @bind="fahrenheit" step="10.0" />
-        </div>
-        <div class="col-sm-3 mt-2">
-            <button class="btn btn-secondary w-100" @onclick="ConvertToC">To °C</button>
-        </div>
+<div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Fahrenheit:</label>
+    <div class="col-sm-9">
+        <input type="number" class="form-control" 
+               @bind="Fahrenheit" @bind:event="oninput" />
+        <input type="range" min="50" max="500" step="10" 
+               @bind="Fahrenheit" @bind:event="oninput" class="form-range w-100" />
     </div>
+</div>
 
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label">Celsius:</label>
-        <div class="col-sm-6">
-            <input type="number" class="form-control" @bind="celsius" step="10.0" />
-        </div>
-        <div class="col-sm-3 mt-2">
-            <button class="btn btn-secondary w-100" @onclick="ConvertToF">To °F</button>
-        </div>
+<div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Celsius:</label>
+    <div class="col-sm-9">
+        <input type="number" class="form-control" 
+               @bind="Celsius" @bind:event="oninput" />
+        <input type="range" min="10" max="260" step="10" 
+               @bind="Celsius" @bind:event="oninput" class="form-range w-100" />
     </div>
+</div>
+
 
     @if (!string.IsNullOrEmpty(result))
     {
+        <p class="mt-3">
+            @fahrenheit °F = @celsius:F1 °C<br />
+            @celsius °C = @fahrenheit:F1 °F
+        </p>
+
         <p class="mt-3">@result</p>
     }
 
@@ -33,18 +39,32 @@
      protected override void OnInitialized()
     {
         // Run initial calculations
-        ConvertToC();
+        SyncFromFahrenheit();
     }
 
-    void ConvertToC()
+    void SyncFromFahrenheit()
     {
-        celsius = Math.Round((fahrenheit - 32) * 5 / 9,1);
+        celsius = Math.Round((fahrenheit - 32) * 5 / 9, 1);
         result = $"{fahrenheit} °F = {celsius:F1} °C";
     }
 
-    void ConvertToF()
+    void SyncFromCelsius()
     {
-        fahrenheit = Math.Round((celsius * 9 / 5) + 32,1);
+        fahrenheit = Math.Round((celsius * 9 / 5) + 32, 1);
         result = $"{celsius} °C = {fahrenheit:F1} °F";
     }
+
+    // Property wrappers so binding triggers conversion automatically
+    double Fahrenheit
+    {
+        get => fahrenheit;
+        set { fahrenheit = value; SyncFromFahrenheit(); }
+    }
+
+    double Celsius
+    {
+        get => celsius;
+        set { celsius = value; SyncFromCelsius(); }
+    }
+
 }

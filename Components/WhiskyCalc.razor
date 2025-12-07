@@ -21,7 +21,12 @@
 <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Target ABV (%):</label>
     <div class="col-sm-9 mt-2">
-        <input type="number" class="form-control" @bind="targetAbv" />
+        <div class="input-group">
+            <input type="number" class="form-control" @bind="targetAbv" />
+            <button class="btn btn-outline-secondary" @onclick="() => SetTarget(40)">40</button>
+            <button class="btn btn-outline-secondary" @onclick="() => SetTarget(43)">43</button>
+            <button class="btn btn-outline-secondary" @onclick="() => SetTarget(46)">46</button>
+        </div>
     </div>
 </div>
 
@@ -36,7 +41,7 @@
     // Defaults
     double volume = 30;
     double currentAbv = 57.2;
-    double targetAbv = 42;
+    double targetAbv = 43;
     double waterToAdd;
 
     protected override void OnInitialized()
@@ -53,6 +58,11 @@
     void SetVolume(double preset)
     {
         volume = preset;
+        CalculateDilution();
+    }
+    void SetTarget(double target)
+    {
+        targetAbv = target;
         CalculateDilution();
     }
 }
