@@ -2,13 +2,18 @@
 
 /* /Layout/MainLayout.razor.rz.scp.css */
 .page[b-fu2jfeqqbm] {
-    position: relative;
+    /* position: relative; */
     display: flex;
     flex-direction: column;
+    min-height: 100vh; /* full viewport height */
 }
 
 main[b-fu2jfeqqbm] {
     flex: 1;
+}
+
+footer[b-fu2jfeqqbm] {
+    flex-shrink: 0; /* stay at bottom */
 }
 
 .sidebar[b-fu2jfeqqbm] {
@@ -50,9 +55,9 @@ main[b-fu2jfeqqbm] {
 }
 
 @media (min-width: 641px) {
-    .page[b-fu2jfeqqbm] {
+    /* .page {
         flex-direction: row;
-    }
+    } */
 
     .sidebar[b-fu2jfeqqbm] {
         width: 250px;
