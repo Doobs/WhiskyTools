@@ -1,11 +1,16 @@
 .page {
-    position: relative;
+    /* position: relative; */
     display: flex;
     flex-direction: column;
+    min-height: 100vh; /* full viewport height */
 }
 
 main {
     flex: 1;
+}
+
+footer {
+    flex-shrink: 0; /* stay at bottom */
 }
 
 .sidebar {
@@ -47,9 +52,9 @@ main {
 }
 
 @media (min-width: 641px) {
-    .page {
+    /* .page {
         flex-direction: row;
-    }
+    } */
 
     .sidebar {
         width: 250px;

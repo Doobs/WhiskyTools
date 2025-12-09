@@ -5,7 +5,7 @@
     <div class="col-sm-9">
         <input type="number" class="form-control" 
                @bind="Fahrenheit" @bind:event="oninput" />
-        <input type="range" min="50" max="500" step="10" 
+        <input type="range" min="50" max="500" step="5" 
                @bind="Fahrenheit" @bind:event="oninput" class="form-range w-100" />
     </div>
 </div>
@@ -15,7 +15,7 @@
     <div class="col-sm-9">
         <input type="number" class="form-control" 
                @bind="Celsius" @bind:event="oninput" />
-        <input type="range" min="10" max="260" step="10" 
+        <input type="range" min="10" max="260" step="5" 
                @bind="Celsius" @bind:event="oninput" class="form-range w-100" />
     </div>
 </div>
