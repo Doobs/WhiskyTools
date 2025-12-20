@@ -168,26 +168,32 @@ code {
     to { opacity: 1; }
 } */
 
-.xnav-tabs {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;             /* hide vertical scrollbar */
-    -webkit-overflow-scrolling: touch;
-}
-.xnav-tabs .nav-item {
-    flex: 0 0 auto;
+
+/* Remove Bootstrap underline */
+.nav-tabs {
+    border-bottom: none; /* remove the connecting line */
+    border-color: var(--bs-primary);
 }
 
+.nav-tabs .nav-link:hover{
+    border-color: var(--bs-primary);
+}
 
 .nav-tabs .nav-link {
-    color: white; 
-    background-color: var(--bs-secondary);             /* darker neutral text */
+    margin-right: 10px; /* spacing between tabs */
+    border: 1px solid var(--bs-primary);
+    color: white;
+    border-radius: 4px 4px 0 0;
+    background-color: var(--bs-secondary);
 }
+
 .nav-tabs .nav-link.active {
-    color: white;              /* stronger for active tab */
-    background-color: var(--bs-primary); /*#e9ecef; subtle background highlight */
-    border-color: #dee2e6 #dee2e6 #fff;
+    background-color: var(--bs-primary);
+    color: white;
+    border-color: var(--bs-primary);
 }
+
+
 
 .card {
     background-color: #FAEFD8; /* #f8f9fa; light grey from Bootstrap palette */
