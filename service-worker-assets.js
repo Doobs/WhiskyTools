@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "f/H+FUSf",
+  "version": "z0s4Mccb",
   "assets": [
     {
       "hash": "sha256-ZFUxGcJs/p82muOTGVgr7zZOfb4V1rJvpaKrwp39zZw=",
@@ -462,7 +462,7 @@ self.assetsManifest = {
       "url": "manifest.webmanifest"
     },
     {
-      "hash": "sha256-bwPMk6hc91xHE/ikVguw0gW+l2R3FQ1lPp9af1kpqOo=",
+      "hash": "sha256-Ooj8671avhmagzfQ3HMTAoVvpuJq6yXtyKNkQovOhRw=",
       "url": "sw-update.js"
     },
     {
