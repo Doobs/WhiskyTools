@@ -18,7 +18,8 @@ Built with a whisky-inspired theme, custom icon, and mobile-friendly layout for 
 ## 🛠️ Getting Started
 
 ### Prerequisites
-- [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
+- [.NET 9 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+<!-- - [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) -->
 - Git
 
 ### Clone the repository
