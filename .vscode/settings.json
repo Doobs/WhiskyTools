@@ -1,0 +1,7 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "d:\\Dev\\WhiskyTools\\dotnet": true,
+        "where.exe": true,
+        "&": true
+    }
+}

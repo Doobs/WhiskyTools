@@ -1,0 +1,102 @@
+@inject IJSRuntime JS
+
+@if (isOpen)
+{
+    <div class="position-fixed top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.35); z-index: 1050;">
+        <div class="card position-absolute top-50 start-50 translate-middle" style="min-width: 420px; max-width: 90vw;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Preset settings</h5>
+                <button class="btn btn-close" @onclick="Close"></button>
+            </div>
+            <div class="card-body">
+                <p class="text-muted small mb-3">These values are stored locally in this browser.</p>
+
+                <div class="mb-3">
+                    <label class="form-label">Pour size presets (ml)</label>
+                    <textarea class="form-control" rows="3" @bind="volumePresetText"></textarea>
+                    <div class="form-text">Enter numbers separated by commas or new lines.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Target ABV presets (%)</label>
+                    <textarea class="form-control" rows="3" @bind="targetPresetText"></textarea>
+                    <div class="form-text">Enter numbers separated by commas or new lines.</div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+                    <button class="btn btn-outline-secondary" @onclick="ResetToDefaults">Reset</button>
+                    <button class="btn btn-primary" @onclick="Save">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public EventCallback<WhiskyTools.Models.WhiskyPresetSettings> OnSettingsChanged { get; set; }
+
+    [Parameter] public WhiskyTools.Models.WhiskyPresetSettings Settings { get; set; } = new();
+
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private bool isOpen = true;
+    private string volumePresetText = string.Empty;
+    private string targetPresetText = string.Empty;
+
+    protected override void OnParametersSet()
+    {
+        volumePresetText = string.Join(", ", Settings.VolumePresets);
+        targetPresetText = string.Join(", ", Settings.TargetAbvPresets);
+    }
+
+    private async Task Save()
+    {
+        var parsedSettings = new WhiskyTools.Models.WhiskyPresetSettings
+        {
+            VolumePresets = ParsePresets(volumePresetText),
+            TargetAbvPresets = ParsePresets(targetPresetText)
+        };
+
+        await SaveToLocalStorage(parsedSettings);
+        await OnSettingsChanged.InvokeAsync(parsedSettings);
+        await Close();
+    }
+
+    private async Task ResetToDefaults()
+    {
+        var defaults = new WhiskyTools.Models.WhiskyPresetSettings
+        {
+            VolumePresets = new List<double> { 30, 50 },
+            TargetAbvPresets = new List<double> { 40, 43, 46 }
+        };
+
+        volumePresetText = string.Join(", ", defaults.VolumePresets);
+        targetPresetText = string.Join(", ", defaults.TargetAbvPresets);
+
+        await SaveToLocalStorage(defaults);
+        await OnSettingsChanged.InvokeAsync(defaults);
+        await Close();
+    }
+
+    private async Task Close()
+    {
+        isOpen = false;
+        await OnClose.InvokeAsync();
+    }
+
+    private async Task SaveToLocalStorage(WhiskyTools.Models.WhiskyPresetSettings settings)
+    {
+        var json = System.Text.Json.JsonSerializer.Serialize(settings);
+        await JS.InvokeVoidAsync("localStorage.setItem", "whiskytools.presetSettings", json);
+    }
+
+    private static List<double> ParsePresets(string value)
+    {
+        return value
+            .Split(new[] { ',', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(v => double.TryParse(v.Trim(), out var parsed) ? parsed : 0)
+            .Where(v => v > 0)
+            .Distinct()
+            .ToList();
+    }
+}

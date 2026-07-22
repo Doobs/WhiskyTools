@@ -1,12 +1,22 @@
-<h4>Whisky Dilution Calculator</h4>
+@using WhiskyTools.Models
+@inject IJSRuntime JS
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">Whisky Dilution Calculator</h4>
+    <button class="btn btn-outline-secondary btn-sm" @onclick="OpenSettings" title="Preset settings">
+        ⚙️
+    </button>
+</div>
 
 <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Volume (ml):</label>
     <div class="col-sm-9 mt-2">
         <div class="input-group">
             <input type="number" class="form-control" @bind="volume" />
-            <button class="btn btn-outline-secondary" @onclick="() => SetVolume(30)">30</button>
-            <button class="btn btn-outline-secondary" @onclick="() => SetVolume(50)">50</button>
+            @foreach (var preset in volumePresets)
+            {
+                <button class="btn btn-outline-secondary" @onclick="() => SetVolume(preset)">@preset.ToString("0")</button>
+            }
         </div>
     </div>
 </div>
@@ -23,9 +33,10 @@
     <div class="col-sm-9 mt-2">
         <div class="input-group">
             <input type="number" class="form-control" @bind="targetAbv" />
-            <button class="btn btn-outline-secondary" @onclick="() => SetTarget(40)">40</button>
-            <button class="btn btn-outline-secondary" @onclick="() => SetTarget(43)">43</button>
-            <button class="btn btn-outline-secondary" @onclick="() => SetTarget(46)">46</button>
+            @foreach (var preset in targetAbvPresets)
+            {
+                <button class="btn btn-outline-secondary" @onclick="() => SetTarget(preset)">@preset.ToString("0")</button>
+            }
         </div>
     </div>
 </div>
@@ -37,16 +48,71 @@
     <p class="mt-3">Add <b>@waterToAdd.ToString("F1") ml</b> of water.</p>
 }
 
+@if (showSettings)
+{
+    <PresetSettings Settings="settings" OnSettingsChanged="HandleSettingsChanged" OnClose="CloseSettings" />
+}
+
 @code {
-    // Defaults
     double volume = 30;
     double currentAbv = 57.2;
     double targetAbv = 43;
     double waterToAdd;
 
-    protected override void OnInitialized()
+    private bool showSettings;
+    private WhiskyPresetSettings settings = new()
     {
+        VolumePresets = new List<double> { 30, 50 },
+        TargetAbvPresets = new List<double> { 40, 43, 46 }
+    };
+
+    private List<double> volumePresets = new() { 30, 50 };
+    private List<double> targetAbvPresets = new() { 40, 43, 46 };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadSettings();
         CalculateDilution();
+    }
+
+    private async Task LoadSettings()
+    {
+        var stored = await JS.InvokeAsync<string?>("localStorage.getItem", "whiskytools.presetSettings");
+        if (!string.IsNullOrWhiteSpace(stored))
+        {
+            try
+            {
+                var parsed = System.Text.Json.JsonSerializer.Deserialize<WhiskyPresetSettings>(stored);
+                if (parsed is not null)
+                {
+                    settings = parsed;
+                    volumePresets = parsed.VolumePresets.Any() ? parsed.VolumePresets : new List<double> { 30, 50 };
+                    targetAbvPresets = parsed.TargetAbvPresets.Any() ? parsed.TargetAbvPresets : new List<double> { 40, 43, 46 };
+                }
+            }
+            catch
+            {
+                // Ignore malformed storage and fall back to defaults.
+            }
+        }
+    }
+
+    private void OpenSettings()
+    {
+        showSettings = true;
+    }
+
+    private void CloseSettings()
+    {
+        showSettings = false;
+    }
+
+    private async Task HandleSettingsChanged(WhiskyPresetSettings updatedSettings)
+    {
+        settings = updatedSettings;
+        volumePresets = updatedSettings.VolumePresets.Any() ? updatedSettings.VolumePresets : new List<double> { 30, 50 };
+        targetAbvPresets = updatedSettings.TargetAbvPresets.Any() ? updatedSettings.TargetAbvPresets : new List<double> { 40, 43, 46 };
+        await Task.CompletedTask;
     }
 
     void CalculateDilution()
@@ -60,6 +126,7 @@
         volume = preset;
         CalculateDilution();
     }
+
     void SetTarget(double target)
     {
         targetAbv = target;
