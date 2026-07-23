@@ -8,11 +8,14 @@ $publishRoot = Join-Path $repoDir "bin\Release\net9.0\publish"
 $publishDir  = Join-Path $publishRoot "wwwroot"
 $worktreeDir = Join-Path $repoDir "../gh-pages"
 
-# Publish if needed
-if (!(Test-Path $publishDir)) {
-    Write-Host "Publishing project..."
-    dotnet publish -c Release
+# Publish fresh output every time so the deployed site matches the latest source
+if (Test-Path $publishRoot) {
+    Write-Host "Removing previous publish output..."
+    Remove-Item $publishRoot -Recurse -Force -ErrorAction SilentlyContinue
 }
+
+Write-Host "Publishing project..."
+ dotnet publish -c Release
 
 # Ensure gh-pages worktree exists (run once manually if needed)
 if (!(Test-Path $worktreeDir)) {
