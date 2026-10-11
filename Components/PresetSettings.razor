@@ -23,6 +23,12 @@
                     <div class="form-text">Enter numbers separated by commas or new lines.</div>
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label">Default current ABV (%)</label>
+                    <input type="number" class="form-control" @bind="defaultCurrentAbv" />
+                    <div class="form-text">Used to pre-fill the calculator when the app opens. Leave blank to use the built-in default.</div>
+                </div>
+
                 <div class="d-flex justify-content-end gap-2">
                     <button class="btn btn-outline-secondary" @onclick="ResetToDefaults">Reset</button>
                     <button class="btn btn-primary" @onclick="Save">Save</button>
@@ -42,11 +48,13 @@
     private bool isOpen = true;
     private string volumePresetText = string.Empty;
     private string targetPresetText = string.Empty;
+    private double? defaultCurrentAbv;
 
     protected override void OnParametersSet()
     {
         volumePresetText = string.Join(", ", Settings.VolumePresets);
         targetPresetText = string.Join(", ", Settings.TargetAbvPresets);
+        defaultCurrentAbv = Settings.DefaultCurrentAbv;
     }
 
     private async Task Save()
@@ -54,7 +62,8 @@
         var parsedSettings = new WhiskyTools.Models.WhiskyPresetSettings
         {
             VolumePresets = ParsePresets(volumePresetText),
-            TargetAbvPresets = ParsePresets(targetPresetText)
+            TargetAbvPresets = ParsePresets(targetPresetText),
+            DefaultCurrentAbv = defaultCurrentAbv is > 0 ? defaultCurrentAbv : null
         };
 
         await SaveToLocalStorage(parsedSettings);
@@ -67,11 +76,13 @@
         var defaults = new WhiskyTools.Models.WhiskyPresetSettings
         {
             VolumePresets = new List<double> { 30, 50 },
-            TargetAbvPresets = new List<double> { 40, 43, 46 }
+            TargetAbvPresets = new List<double> { 40, 43, 46 },
+            DefaultCurrentAbv = null
         };
 
         volumePresetText = string.Join(", ", defaults.VolumePresets);
         targetPresetText = string.Join(", ", defaults.TargetAbvPresets);
+        defaultCurrentAbv = defaults.DefaultCurrentAbv;
 
         await SaveToLocalStorage(defaults);
         await OnSettingsChanged.InvokeAsync(defaults);

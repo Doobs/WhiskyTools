@@ -4,4 +4,5 @@ public class WhiskyPresetSettings
 {
     public List<double> VolumePresets { get; set; } = new();
     public List<double> TargetAbvPresets { get; set; } = new();
+    public double? DefaultCurrentAbv { get; set; }
 }
