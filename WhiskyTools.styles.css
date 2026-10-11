@@ -1,5 +1,25 @@
 @import '_content/Blazor.Bootstrap/Blazor.Bootstrap.olwso25aue.bundle.scp.css';
 
+/* /Components/WhiskyCalc.razor.rz.scp.css */
+.icon-btn[b-x7bguoez1j] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--bs-primary);
+    cursor: pointer;
+}
+
+.icon-btn:hover[b-x7bguoez1j],
+.icon-btn:focus[b-x7bguoez1j] {
+    background: rgba(139, 92, 44, 0.12);
+    color: var(--bs-secondary);
+}
 /* /Layout/MainLayout.razor.rz.scp.css */
 .page[b-fu2jfeqqbm] {
     /* position: relative; */

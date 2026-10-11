@@ -1,8 +1,8 @@
 self.assetsManifest = {
-  "version": "R9PPdA2d",
+  "version": "q0IfGMoJ",
   "assets": [
     {
-      "hash": "sha256-ZFUxGcJs/p82muOTGVgr7zZOfb4V1rJvpaKrwp39zZw=",
+      "hash": "sha256-k6XN8upIobCAFoyfCdej22rs5ERrLIFCeskIib7Wgjo=",
       "url": "WhiskyTools.styles.css"
     },
     {
@@ -58,8 +58,8 @@ self.assetsManifest = {
       "url": "_framework/Microsoft.AspNetCore.Components.WebAssembly.mhi741p0i5.wasm"
     },
     {
-      "hash": "sha256-D78tTC6STdbcDkQDerGYuCNMmhHgfrVHhaf8whMglHA=",
-      "url": "_framework/Microsoft.AspNetCore.Components.l7ah3kcecf.wasm"
+      "hash": "sha256-ur36mxb5qcLZyYr/Q5cP6eH5fg/04uHHUeYeJ9mvsMc=",
+      "url": "_framework/Microsoft.AspNetCore.Components.emu1dhqthn.wasm"
     },
     {
       "hash": "sha256-AyL87FvJMf14Dcn8HeQ3n2veg/RQGVGCjfpJPt1RQC4=",
@@ -222,11 +222,11 @@ self.assetsManifest = {
       "url": "_framework/System.t4d4s3f398.wasm"
     },
     {
-      "hash": "sha256-+xv2Lp3PubnyySHjBpWtKM7bByiHmdoyzCIXZd2bGMA=",
-      "url": "_framework/WhiskyTools.97wk4kffg2.wasm"
+      "hash": "sha256-JHoWblYzC/J/RsMsnbfkPf9MSw6J5iEczB5W4Ki7Tz8=",
+      "url": "_framework/WhiskyTools.0xc3ixyalt.wasm"
     },
     {
-      "hash": "sha256-7bKGlmOjBCl4c8Bj8Sbe9L8CvtLfYARvnNoh5N+oTK0=",
+      "hash": "sha256-EPSP74pBPGC/C3zfC74Nona3FnEinc/+Aqfl+EMBPiM=",
       "url": "_framework/blazor.boot.json"
     },
     {
